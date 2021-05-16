@@ -7,7 +7,7 @@ class IncrementBloc with StarterBloc<int> {
     streamAdd(_counter);
   }
 
-  void eventIncrementCounter() {
+  void incrementCounter() {
     _counter++;
     streamAdd(_counter);
   }

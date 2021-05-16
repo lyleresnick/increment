@@ -13,12 +13,13 @@ class IncrementScene extends StatelessWidget {
       child: StreamBuilder<int>(
         stream: _bloc.stream,
         builder: (context, snapshot) {
-
+          if (!snapshot.hasData)
+            return Container();
           final counterValue = snapshot.data;
 
           return Scaffold(
             appBar: AppBar(
-              title: Text('Flutter Demo Home Page'),
+              title: Text('Increment'),
             ),
             body: Center(
               child: Column(
@@ -35,7 +36,7 @@ class IncrementScene extends StatelessWidget {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: _bloc.eventIncrementCounter,
+              onPressed: _bloc.incrementCounter,
               tooltip: 'Increment',
               child: Icon(Icons.add),
             ),
