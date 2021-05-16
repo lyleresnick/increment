@@ -4,21 +4,24 @@ import 'common/bloc_provider.dart';
 import 'increment_bloc.dart';
 
 class IncrementScene extends StatelessWidget {
-
-  final _bloc = IncrementBloc();
+  final IncrementBloc _bloc;
+  IncrementScene(this._bloc);
 
   Widget build(BuildContext context) {
+
     return BlocProvider<IncrementBloc>(
       bloc: _bloc,
       child: StreamBuilder<int>(
         stream: _bloc.stream,
         builder: (context, snapshot) {
 
+          if (!snapshot.hasData)
+            return Container();
           final counterValue = snapshot.data;
 
           return Scaffold(
             appBar: AppBar(
-              title: Text('Flutter Demo Home Page'),
+              title: Text('Increment (Injected Bloc)'),
             ),
             body: Center(
               child: Column(
@@ -35,7 +38,7 @@ class IncrementScene extends StatelessWidget {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: _bloc.eventIncrementCounter,
+              onPressed: _bloc.incrementCounter,
               tooltip: 'Increment',
               child: Icon(Icons.add),
             ),
